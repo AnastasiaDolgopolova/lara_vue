@@ -37,6 +37,12 @@ export default {
                     this.age = null;
                     this.job = null;
                 })
+                .catch( error => {
+
+                })
+                .finally({
+
+                })
         }
     }
 

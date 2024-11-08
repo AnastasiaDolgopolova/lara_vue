@@ -23,4 +23,6 @@ Route::group(['namespace' => 'API', 'prefix' => 'people'], function ()
 {
     Route::get('/', [PersonController::class, 'index']);
     Route::post('/', [PersonController::class, 'store']);
+    Route::patch('/{person}', [PersonController::class, 'update']);
+    Route::delete('/{person}', [PersonController::class, 'destroy']);
 });
