@@ -1,31 +1,34 @@
 <template>
-    <div class="container">
-        <SinglePostComponent></SinglePostComponent>
+    <div>
+        post component
+    </div>
+<!--    <div class="container">-->
+<!--        <SinglePostComponent></SinglePostComponent>-->
 
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Age</th>
-                <th scope="col">Job</th>
-            </tr>
-            </thead>
-            <tbody>
-                    <tr v-for="person in persons">
-                        <th scope="row">{{person.id}}</th>
-                        <td>{{person.name}}</td>
-                        <td>{{person.age}}</td>
-                        <td>{{person.job}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th scope="col">#</th>-->
+<!--                <th scope="col">Name</th>-->
+<!--                <th scope="col">Age</th>-->
+<!--                <th scope="col">Job</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--                    <tr v-for="person in persons">-->
+<!--                        <th scope="row">{{person.id}}</th>-->
+<!--                        <td>{{person.name}}</td>-->
+<!--                        <td>{{person.age}}</td>-->
+<!--                        <td>{{person.job}}</td>-->
+<!--                    </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
     </template>
 
     <script>
-    import SinglePostComponent from "@/components/SinglePostComponent.vue";
+   // import SinglePostComponent from "@/components/SinglePostComponent.vue";
     import axios from "axios";
     export default {
         name: "PostComponent",
@@ -36,31 +39,31 @@
             }
         },
 
-        mounted() {
-            this.getPersons();
-        },
-
-        methods: {
-            getPersons() {
-                axios.get('/persons')
-                .then( res => {
-                    this.persons = res.data;
-                })
-                .catch( error => {
-
-                })
-                .finally({
-
-                })
-            },
-        },
-
-        computed: {
-        },
-
-        components: {
-            SinglePostComponent
-        }
+        // mounted() {
+        //     this.getPersons();
+        // },
+        //
+        // methods: {
+        //     getPersons() {
+        //         axios.get('/persons')
+        //         .then( res => {
+        //             this.persons = res.data;
+        //         })
+        //         .catch( error => {
+        //
+        //         })
+        //         .finally({
+        //
+        //         })
+        //     },
+        // },
+        //
+        // computed: {
+        // },
+        //
+        // components: {
+        //     SinglePostComponent
+        // }
     }
     </script>
 
