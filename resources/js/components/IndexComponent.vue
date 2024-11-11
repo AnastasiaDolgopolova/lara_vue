@@ -13,21 +13,8 @@
             </thead>
             <tbody>
                 <template v-for="person in people">
-                    <tr :class="isEdit(person.id) ? 'd-none' : ''">
-                        <th scope="row">{{person.id}}</th>
-                        <td>{{person.name}}</td>
-                        <td>{{person.age}}</td>
-                        <td>{{person.job}}</td>
-                        <td><a href="#" @click.prevent="changeEditPersonId(person.id, person.name, person.age, person.job)" class="btn btn-warning">Edit</a></td>
-                        <td><a href="#" @click.prevent="deletePerson(person.id)" class="btn btn-danger">Delete</a></td>
-                    </tr>
-                     <tr :class="isEdit(person.id) ? '' : 'd-none'">
-                        <th scope="row">{{person.id}}</th>
-                        <td><input type="text" v-model="name" class="form-control"></td>
-                        <td><input type="number" v-model="age" class="form-control"></td>
-                        <td><input type="text" v-model="job" class="form-control"></td>
-                        <td><a href="#" @click.prevent="updatePerson(person.id)" class="btn btn-warning">Update</a></td>
-                    </tr>
+                    <ShowComponent :person="person"  :ref="`show_${person.id}`"></ShowComponent>
+                     <EditComponent :person="person" :ref="`edit_${person.id}`"></EditComponent>
 
                 </template>
             </tbody>
@@ -37,6 +24,8 @@
 </template>
 
 <script>
+import EditComponent from "@/components/EditComponent.vue";
+import ShowComponent from "@/components/ShowComponent.vue";
 
 export default {
     name: "IndexComponent",
@@ -53,6 +42,8 @@ export default {
 
     mounted() {
         this.getPeople();
+
+       // console.log(this.$parent.parentLog());
     },
 
     methods: {
@@ -69,45 +60,58 @@ export default {
             })
         },
 
-        updatePerson(id) {
-            this.editPersonId = null;
-            axios.patch(`/api/people/${id}`, {name: this.name, age: this.age, job: this.job})
-                .then( res => {
-                    this.person = res.data;
-                    this.getPeople();
-                })
-                .catch( error => {
-
-                })
-                .finally({
-
-                })
-        },
-
-        deletePerson(id) {
-            axios.delete(`/api/people/${id}`)
-                .then( res => {
-                    this.getPeople();
-                })
-                .catch( error => {
-
-                })
-                .finally({
-
-                })
-        },
-
-        changeEditPersonId(id, name, age, job) {
-            this.editPersonId = id;
-            this.name = name;
-            this.age = age;
-            this.job = job;
-            console.log(this.editPersonId);
-        },
+        // updatePerson(id) {
+        //     this.editPersonId = null;
+        //     axios.patch(`/api/people/${id}`, {name: this.name, age: this.age, job: this.job})
+        //         .then( res => {
+        //             this.person = res.data;
+        //             this.getPeople();
+        //         })
+        //         .catch( error => {
+        //
+        //         })
+        //         .finally({
+        //
+        //         })
+        // },
+        //
+        // deletePerson(id) {
+        //     axios.delete(`/api/people/${id}`)
+        //         .then( res => {
+        //             this.getPeople();
+        //         })
+        //         .catch( error => {
+        //
+        //         })
+        //         .finally({
+        //
+        //         })
+        // },
+        //
+        // changeEditPersonId(id, name, age, job) {
+        //     this.editPersonId = id;
+        //     let editName = `edit_${id}`;
+        // //    console.log(this.$refs);
+        // //    console.log(this.$refs.edit_1[0]);
+        // //    console.log(this.$refs[editName][0]);
+        //   let fullEditName = this.$refs[editName][0];
+        //   fullEditName.name = name;
+        //   fullEditName.age = age;
+        //   fullEditName.job = job;
+        // },
 
         isEdit(id) {
             return this.editPersonId === id;
         },
+
+        indexLog() {
+            console.log('this is index component');
+        }
+    },
+
+    components: {
+        EditComponent,
+        ShowComponent,
     }
 
 }

@@ -12,12 +12,14 @@
         <div class="mb-3">
             <input @click.prevent="addPerson" class="btn btn-primary" value="Add">
         </div>
+<!--        <SomeComponent color="black" number="29" is-published="true"></SomeComponent>-->
+        <SomeComponent :obj="obj"></SomeComponent>
     </div>
 
 </template>
 
 <script>
-
+import SomeComponent from "@/components/SomeComponent.vue";
 export default {
     name: "CreateComponent",
 
@@ -25,8 +27,17 @@ export default {
         return {
             name: null,
             age: null,
-            job: null
+            job: null,
+            obj: {
+                color: 'green',
+                number: '12',
+                isPublished: false,
+            }
         }
+    },
+
+    mounted() {
+      //  console.log(this.$parent.$refs.index.indexLog());
     },
 
     methods: {
@@ -36,6 +47,7 @@ export default {
                     this.name = null;
                     this.age = null;
                     this.job = null;
+                    this.$parent.$refs.index.getPeople();
                 })
                 .catch( error => {
 
@@ -44,6 +56,10 @@ export default {
 
                 })
         }
+    },
+
+    components: {
+        SomeComponent,
     }
 
 }
