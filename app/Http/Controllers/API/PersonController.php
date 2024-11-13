@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Person\StoreRequest;
 use App\Http\Requests\Person\UpdateRequest;
+use App\Http\Resources\Person\PersonResource;
 use App\Models\Person;
 
 class PersonController extends Controller
@@ -14,6 +15,11 @@ class PersonController extends Controller
         $people = Person::all();
 
         return $people;
+    }
+
+    public function show(Person $person)
+    {
+        return new PersonResource($person);
     }
 
     public function store(StoreRequest $request)
