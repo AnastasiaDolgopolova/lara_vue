@@ -1,5 +1,5 @@
 <template>
-    <div class="w-25">
+    <div class="w-25 mt-3">
         <div class="mb-3">
             <input type="text" class="form-control" v-model="name" id="name" placeholder="name">
         </div>
@@ -10,7 +10,7 @@
             <input type="text" class="form-control" v-model="job" id="job" placeholder="job">
         </div>
         <div class="mb-3">
-            <input @click.prevent="storePerson" class="btn btn-primary" value="Add">
+            <input :disabled="!isDisabled" @click.prevent="storePerson" class="btn btn-primary" value="Add">
         </div>
     </div>
 </template>
@@ -41,6 +41,12 @@ export default {
                 })
         }
     },
+
+    computed: {
+        isDisabled() {
+            return this.name && this.age && this.job;
+        },
+    }
 }
 </script>
 

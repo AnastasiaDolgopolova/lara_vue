@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Person\StoreRequest;
 use App\Http\Requests\Person\UpdateRequest;
+use App\Http\Resources\Person\PersonCollection;
 use App\Http\Resources\Person\PersonResource;
 use App\Models\Person;
 
@@ -14,7 +15,7 @@ class PersonController extends Controller
     {
         $people = Person::all();
 
-        return $people;
+        return PersonResource::collection($people);
     }
 
     public function show(Person $person)
@@ -27,7 +28,8 @@ class PersonController extends Controller
         $data = $request->validated();
         $person = Person::create($data);
 
-        return $person;
+        //return new PersonResource($person);
+        return response([]);
     }
 
     public function update(UpdateRequest $request, Person $person)
@@ -35,7 +37,8 @@ class PersonController extends Controller
         $data = $request->validated();
         $person->update($data);
 
-        return $person;
+       // return new PersonResource($person);
+        return response([]);
     }
 
     public function destroy(Person $person)

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mt-3">
         <table class="table">
             <thead>
             <tr>
@@ -49,7 +49,7 @@ export default {
         getPeople() {
             axios.get('/api/people')
                 .then( res => {
-                    this.people = res.data;
+                    this.people = res.data.data;
                 })
                 .catch( error => {
                 })
